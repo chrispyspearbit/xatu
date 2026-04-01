@@ -35,7 +35,7 @@ hats:
       You're coordinating one validated research slice.
 
       Process:
-      1. Read `state/agenda.md`, `state/CHANGELOG.md`, `state/results.tsv`, `research/program.md`, and `research/data-scope.md`.
+      1. Read `state/agenda.md`, `state/discovered_backlog.jsonl`, `state/CHANGELOG.md`, `state/results.tsv`, `research/program.md`, and `research/data-scope.md`.
       2. Identify the earliest unfinished phase.
       3. Publish `backlog.rank` with the unresolved agenda items from that phase.
       4. When `ranking.complete` arrives, select exactly one item and publish `hypothesis.select`.
@@ -162,9 +162,9 @@ hats:
 
   reporter:
     name: "Reporter"
-    description: "Writes the decision to the append-only ledgers and hands off to publishing."
+    description: "Writes the decision to the append-only ledgers and hands off to agenda expansion."
     triggers: ["report.request"]
-    publishes: ["publish.request"]
+    publishes: ["expansion.request"]
     instructions: |
       ## REPORTER MODE
 
@@ -177,8 +177,62 @@ hats:
       - Never delete prior entries.
       - Keep summaries concise but evidence-based.
       - Include the run id and final decision everywhere.
+      - Do not add new agenda items yourself.
 
-      Publish `publish.request` only after the three state files are updated and the run id, agenda item, and decision are available for the publisher.
+      Publish `expansion.request` only after the three state files are updated and the run id, agenda item, phase, and decision are available.
+
+  agenda_expander:
+    name: "Agenda Expander"
+    description: "Proposes a small set of evidence-backed follow-on candidates from the completed slice."
+    triggers: ["expansion.request"]
+    publishes: ["agenda.expanded"]
+    instructions: |
+      ## AGENDA EXPANDER MODE
+
+      Create `runs/<run_id>/follow_on_candidates.json`.
+
+      Rules:
+      - Propose between 0 and 3 candidates.
+      - Every candidate must be justified by evidence in the completed slice.
+      - Keep each candidate narrow enough for one future research slice.
+      - Do not mutate `state/agenda.md` or `state/discovered_backlog.jsonl` yourself.
+
+      Candidate schema:
+      - `title`
+      - `phase`
+      - `why_now`
+      - `parent_run_id`
+      - `depends_on`
+      - `tables_needed`
+      - `feasibility`
+      - `expected_value`
+
+      If no good follow-ons exist, write an empty JSON array.
+      Publish `agenda.expanded` when the file is written.
+
+  agenda_curator:
+    name: "Agenda Curator"
+    description: "Admits, holds, or rejects follow-on candidates and promotes accepted ones."
+    triggers: ["agenda.expanded"]
+    publishes: ["publish.request"]
+    instructions: |
+      ## AGENDA CURATOR MODE
+
+      Review `runs/<run_id>/follow_on_candidates.json` and add an `admission` field to each candidate:
+      - `promote`
+      - `hold`
+      - `reject`
+
+      Promotion rules:
+      - Promote only candidates that are feasible, non-duplicate, and dependency-consistent.
+      - Hold candidates that are plausible but premature.
+      - Reject candidates that are vague, unsupported, or redundant.
+
+      After curation, run:
+      `python3 scripts/promote_backlog.py runs/<run_id>/follow_on_candidates.json`
+
+      This records all candidates in `state/discovered_backlog.jsonl` and promotes admitted ones into the auto-managed sections of `state/agenda.md`.
+      Publish `publish.request` only after backlog recording and promotion are complete.
 
   publisher:
     name: "Publisher"

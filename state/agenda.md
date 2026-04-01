@@ -9,6 +9,8 @@ Status key:
 
 ## Phase 1 — Foundations
 
+### Seeded Items
+
 1. [ ] Builder / Relay Market Map
    Goal: quantify builder share, relay share, overlap, concentration, and churn.
    Core tables: `mev_relay_proposer_payload_delivered`, `mev_relay_validator_registration`, `mev_relay_bid_trace`
@@ -24,7 +26,14 @@ Status key:
    Core tables: `mempool_transaction`, `canonical_execution_transaction`, `mev_relay_proposer_payload_delivered`
    Acceptance: one validated run with coverage estimates, methodology, and caveats.
 
+### Promoted Items
+
+<!-- AUTO-PROMOTED:phase-1:start -->
+<!-- AUTO-PROMOTED:phase-1:end -->
+
 ## Phase 2 — Extraction and Behavioral Modeling
+
+### Seeded Items
 
 4. [ ] Realized MEV Taxonomy
    Goal: classify realized MEV patterns from canonical execution traces and logs.
@@ -35,7 +44,14 @@ Status key:
 6. [ ] Validator / Proposer Dependency and Concentration Risk
    Goal: measure relay and builder dependence across validator cohorts.
 
+### Promoted Items
+
+<!-- AUTO-PROMOTED:phase-2:start -->
+<!-- AUTO-PROMOTED:phase-2:end -->
+
 ## Phase 3 — Opportunity and Portability
+
+### Seeded Items
 
 7. [ ] Opportunity Archive
    Goal: turn validated classifications into a historical opportunity library.
@@ -46,3 +62,7 @@ Status key:
 9. [ ] Cross-Chain Portability Framework
    Goal: separate chain-specific heuristics from portable research methodology.
 
+### Promoted Items
+
+<!-- AUTO-PROMOTED:phase-3:start -->
+<!-- AUTO-PROMOTED:phase-3:end -->

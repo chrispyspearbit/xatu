@@ -34,6 +34,20 @@ We take the runtime substrate:
 
 Ralph is the control plane. The repository state is the durable research memory.
 
+## Two-Layer Agenda
+
+The agenda now has two layers:
+
+1. Fixed spine
+   - the human-curated phase structure
+   - the seeded items that define the program
+2. Derived backlog
+   - evidence-backed follow-on items discovered during completed slices
+   - recorded first in `state/discovered_backlog.jsonl`
+   - promoted into `state/agenda.md` only after curation
+
+This keeps the program expandable without letting it drift into undirected brainstorming.
+
 ## Topology
 
 ```text
@@ -46,6 +60,8 @@ research_slice.start
   -> validator
   -> reflector
   -> reporter
+  -> agenda_expander
+  -> agenda_curator
   -> publisher
   -> RESEARCH_SLICE_COMPLETE
 ```
@@ -68,6 +84,7 @@ Every completed run must produce a bundle under `runs/<run_id>/` with:
 - `manifest.json`
 - `plan.md`
 - `evidence.md`
+- `follow_on_candidates.json`
 - `metrics.json`
 - `report.md`
 
@@ -85,6 +102,7 @@ If the bundle fails validation, the slice is either revised or marked `BLOCKED`.
 
 Human-readable durable state lives in `state/`:
 - `agenda.md`: queue and terminal statuses
+- `discovered_backlog.jsonl`: raw discovered follow-on items plus admission outcomes
 - `CHANGELOG.md`: narrative reasoning and decisions
 - `results.tsv`: compact structured ledger
 
@@ -108,6 +126,7 @@ Allowed:
 
 Not allowed:
 - concurrent edits to `state/agenda.md`
+- concurrent appends to `state/discovered_backlog.jsonl`
 - concurrent appends to `state/results.tsv`
 - concurrent narrative updates to `state/CHANGELOG.md`
 - concurrent pushes of canonical state to `origin`
@@ -121,10 +140,20 @@ Publishing is part of completion, not optional follow-up.
 After validation and ledger updates, the publisher stages only:
 - `runs/<run_id>/`
 - `state/agenda.md`
+- `state/discovered_backlog.jsonl`
 - `state/CHANGELOG.md`
 - `state/results.tsv`
 
 Then it creates a structured commit and pushes the current branch to `origin`.
+
+## Expansion Policy
+
+The system is allowed to expand the agenda, but only under strict rules:
+- at most three follow-on candidates per slice
+- every candidate must cite evidence from the slice that produced it
+- promotion is phase-aware and cannot bypass unfinished earlier phases
+- duplicates are filtered against the existing agenda and queued backlog
+- rejected or held candidates remain visible in `state/discovered_backlog.jsonl`
 
 ## Phase Gating
 

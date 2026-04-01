@@ -42,12 +42,14 @@ The current design assumes one validated research slice per Ralph run. That keep
 ├── runs/                      # One directory per validated experiment
 ├── scripts/
 │   ├── publish_slice.sh       # Stages, commits, and pushes one validated slice
+│   ├── promote_backlog.py     # Records and promotes derived agenda items
 │   └── validate_run.py        # Hard validation for run bundles
 ├── specs/
 │   └── phase-01-foundations.spec.md
 └── state/
-    ├── agenda.md              # Current queue and statuses
+    ├── agenda.md              # Canonical agenda with seeded + promoted items
     ├── CHANGELOG.md           # Append-only research narrative
+    ├── discovered_backlog.jsonl # Raw follow-on candidates and admission outcomes
     └── results.tsv            # Append-only structured result ledger
 ```
 
@@ -58,9 +60,10 @@ The current design assumes one validated research slice per Ralph run. That keep
 3. Turn it into a concrete experiment contract in `runs/<run_id>/`.
 4. Execute the analysis and produce the required run bundle.
 5. Run `python3 scripts/validate_run.py runs/<run_id>`.
-6. If validation passes, update `state/CHANGELOG.md`, `state/results.tsv`, and `state/agenda.md`.
-7. Commit and push the validated slice to GitHub.
-8. Stop after that single research slice is resolved.
+6. If validation passes, update `state/CHANGELOG.md`, `state/results.tsv`, and the selected agenda item in `state/agenda.md`.
+7. Derive up to three evidence-backed follow-on candidates, record them in `state/discovered_backlog.jsonl`, and auto-promote admitted candidates into the relevant phase in `state/agenda.md`.
+8. Commit and push the validated slice to GitHub.
+9. Stop after that single research slice is resolved.
 
 GitHub is the canonical remote record of validated slices, not just a backup of local work.
 
@@ -72,6 +75,9 @@ ralph run --config ralph.yml
 
 # Validate a completed run bundle
 make validate-run RUN=runs/<run_id>
+
+# Promote curated follow-on candidates manually, if needed
+make promote-backlog CANDIDATES=runs/<run_id>/follow_on_candidates.json
 
 # Publish a completed slice manually, if needed
 scripts/publish_slice.sh <run_id> "<agenda item>"
@@ -91,4 +97,4 @@ Bad candidates:
 - overlapping long-running analyses on the same question
 - anything that depends on an unresolved validation result
 
-The merge boundary is simple: parallel loops may create or update their own run bundles, but only the primary loop updates `state/agenda.md`, `state/CHANGELOG.md`, `state/results.tsv`, and performs the final publish to GitHub.
+The merge boundary is simple: parallel loops may create or update their own run bundles, but only the primary loop updates `state/agenda.md`, `state/discovered_backlog.jsonl`, `state/CHANGELOG.md`, `state/results.tsv`, and performs the final publish to GitHub.

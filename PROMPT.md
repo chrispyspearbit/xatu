@@ -14,6 +14,7 @@ This loop is not for speculative strategy writing. It is for evidence-backed res
 - `research/program.md`
 - `specs/phase-01-foundations.spec.md`
 - `state/agenda.md`
+- `state/discovered_backlog.jsonl`
 - `state/CHANGELOG.md`
 - `state/results.tsv`
 - `docs/architecture.md`
@@ -36,12 +37,17 @@ You are executing exactly one agenda item per run.
 5. Run `python3 scripts/validate_run.py runs/<run_id>`.
 6. If validation passes, update:
    - `state/agenda.md`
+   - `state/discovered_backlog.jsonl`
    - `state/CHANGELOG.md`
    - `state/results.tsv`
-7. Publish the validated slice to GitHub:
+7. Generate and process evidence-backed follow-on candidates:
+   - write `runs/<run_id>/follow_on_candidates.json`
+   - record all candidates in `state/discovered_backlog.jsonl`
+   - promote only admitted candidates into `state/agenda.md`
+8. Publish the validated slice to GitHub:
    - run `scripts/publish_slice.sh <run_id> "<agenda item>"`
    - confirm the push to `origin` succeeded
-8. Stop after that single agenda item reaches a terminal state.
+9. Stop after that single agenda item reaches a terminal state.
 
 ## Hard Constraints
 
@@ -52,6 +58,8 @@ You are executing exactly one agenda item per run.
 5. If the data is insufficient, say so and mark the item `BLOCKED` rather than hallucinating a result.
 6. Parallel work is allowed only if it writes to isolated `runs/<run_id>/` directories. Shared ledgers are updated only after validation.
 7. A slice is not complete until the validated run bundle and updated state have been committed and pushed to GitHub.
+8. New agenda items must come from evidence in the completed slice, not generic brainstorming.
+9. Propose at most three follow-on candidates per slice.
 
 ## Run Bundle Contract
 
@@ -60,6 +68,7 @@ Every run directory must contain:
 - `manifest.json`
 - `plan.md`
 - `evidence.md`
+- `follow_on_candidates.json`
 - `metrics.json`
 - `report.md`
 
@@ -101,7 +110,8 @@ The loop is complete when:
 - one agenda item was taken from `state/agenda.md`
 - a run bundle was created under `runs/<run_id>/`
 - `scripts/validate_run.py` passed, or the item was explicitly marked `BLOCKED`
-- `state/agenda.md`, `state/CHANGELOG.md`, and `state/results.tsv` were updated
+- `state/agenda.md`, `state/discovered_backlog.jsonl`, `state/CHANGELOG.md`, and `state/results.tsv` were updated
+- `runs/<run_id>/follow_on_candidates.json` was written and processed
 - the validated slice was committed and pushed to `origin`
 
 Output `RESEARCH_SLICE_COMPLETE` only after all of the above are true.

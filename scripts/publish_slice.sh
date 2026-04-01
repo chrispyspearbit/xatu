@@ -32,7 +32,7 @@ if [[ -z "$BRANCH" ]]; then
   exit 1
 fi
 
-git add "$RUN_DIR" state/agenda.md state/CHANGELOG.md state/results.tsv
+git add "$RUN_DIR" state/agenda.md state/discovered_backlog.jsonl state/CHANGELOG.md state/results.tsv
 
 if git diff --cached --quiet; then
   echo "No staged changes for slice $RUN_ID" >&2
