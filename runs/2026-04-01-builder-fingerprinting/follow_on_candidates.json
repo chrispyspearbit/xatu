@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Per-Builder Delivery Profile Execution",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice defined 8 fingerprint dimensions and archetype hypotheses. Executing GROUP BY queries on delivery data (builder pubkey → block count, relay distribution, value stats, gas utilization) would produce exact per-builder profiles replacing estimated ranges.",
+    "parent_run_id": "2026-04-01-builder-fingerprinting",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_proposer_payload_delivered"],
+    "feasibility": "high",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "Same-Date Bid-Delivery Builder Matching",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice identified the 18-month date mismatch between bid trace (2024) and delivery (2026) as the primary limitation for cross-source fingerprinting. Obtaining same-date data would enable definitive bid-to-delivery fingerprint correlation per builder.",
+    "parent_run_id": "2026-04-01-builder-fingerprinting",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_bid_trace", "mev_relay_proposer_payload_delivered"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "Builder MEV Composition Attribution",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice fingerprints builders by block-construction traits but not by MEV content. Joining builder delivery data with canonical execution traces and the MEV taxonomy would reveal whether different builder archetypes specialize in different MEV types.",
+    "parent_run_id": "2026-04-01-builder-fingerprinting",
+    "depends_on": ["Per-Builder Delivery Profile Execution"],
+    "tables_needed": ["mev_relay_proposer_payload_delivered", "canonical_execution_traces", "canonical_execution_transaction"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  }
+]

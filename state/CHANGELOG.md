@@ -161,4 +161,35 @@ Second validated research slice. Agenda item #2: Auction Microstructure (Phase 1
 3. Same-Day Bid-to-Delivery Win Rate — join bid and delivery for same date
 
 ---
+## Entry #5 — Builder Fingerprinting — 2026-04-01
+
+### Context
+
+Fifth validated research slice. Agenda item #5: Builder Fingerprinting (Phase 2). This is the second Phase 2 item, building on the Realized MEV Taxonomy and prior Phase 1 foundations (Builder/Relay Market Map, Auction Microstructure).
+
+### Key Findings
+
+- Xatu relay delivery and bid trace data structurally support behavioral fingerprinting of Ethereum block builders along 8 observable dimensions: market share, relay routing breadth, relay routing concentration (per-builder HHI), mean block value, block value variance, gas utilization, bid intensity, and num_tx per bid.
+- Builders are expected to cluster into 4-5 behavioral archetypes: dominant extractors (>10% share, all relays, high value), competitive regulars (1-10%), selective specialists (0.3-1%), competitive fringe (<0.3%), and potential MEV snipers (rare, high-variance bids).
+- The 47 builders in delivery data and 109 builders in bid trace data provide sufficient population size for meaningful clustering, but the 18-month date gap between sources limits cross-dimensional fingerprint matching.
+- Four cross-dimensional correlation hypotheses were identified as structurally testable: market share vs bid intensity, relay breadth vs market share, bid value vs market share, and num_tx vs bid value.
+
+### Decision
+
+**KEEP** — establishes a reusable fingerprinting framework with clear dimensions, archetype hypotheses, and testable correlations. Per-builder GROUP BY query execution is deferred to a follow-on slice.
+
+### Limitations
+
+- Structural analysis only; per-builder queries not executed against parquet data.
+- 18-month date mismatch between delivery (2026-03-29) and bid trace (2024-09-13) data.
+- Single-day windows; fingerprints may vary by market regime.
+- No MEV type attribution per builder (requires trace/log joins).
+
+### Follow-On Candidates (all held for curation)
+
+1. Per-Builder Delivery Profile Execution — GROUP BY on builder pubkey for exact fingerprint values
+2. Same-Date Bid-Delivery Builder Matching — temporally aligned data for cross-source fingerprinting
+3. Builder MEV Composition Attribution — join builder blocks with MEV taxonomy for type-level fingerprints
+
+---
 

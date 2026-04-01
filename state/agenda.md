@@ -38,7 +38,7 @@ Status key:
 4. [K] Realized MEV Taxonomy
    Goal: classify realized MEV patterns from canonical execution traces and logs.
 
-5. [ ] Builder Fingerprinting
+5. [K] Builder Fingerprinting
    Goal: cluster builders by stable block-construction style and MEV composition.
 
 6. [ ] Validator / Proposer Dependency and Concentration Risk

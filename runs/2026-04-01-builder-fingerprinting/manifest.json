@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-04-01-builder-fingerprinting",
+  "phase": "Phase 2 — Extraction and Behavioral Modeling",
+  "question": "Can Ethereum block builders be clustered into behaviorally distinct groups using observable block-construction traits from Xatu relay delivery and bid trace data?",
+  "hypothesis": "Builders exhibit stable, distinguishable block-construction styles that can be characterized along observable dimensions: relay routing preference, block gas utilization, delivery frequency, bid intensity, and value distribution. These traits cluster into a small number of behavioral archetypes that go beyond simple market share ranking.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The slice establishes an 8-dimensional fingerprinting framework for Ethereum block builders using Xatu relay delivery and bid trace data. The framework identifies structural feasibility of behavioral clustering into 4-5 archetypes and documents testable correlation hypotheses. Confidence is medium due to aggregate-level analysis without per-builder query execution and the 18-month date mismatch between data sources."
+  },
+  "tables_used": [
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "6,597 unique delivered blocks, 47 builders, 8 relays; supports 6 fingerprint dimensions (market share, relay routing, value distribution, gas utilization)"
+    },
+    {
+      "name": "mev_relay_bid_trace",
+      "date_start": "2024-09-13",
+      "date_end": "2024-09-13",
+      "row_count": 7819236,
+      "notes": "6,620 slots, 109 builders; supports 2 additional fingerprint dimensions (bid intensity, num_tx per bid); 18-month date gap from delivery data"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "060ab7c",
+    "created_at": "2026-04-01T08:00:00Z",
+    "data_source": "Xatu public parquet export via ethpandaops",
+    "notes": "Structural feasibility analysis for builder behavioral fingerprinting. Row counts from prior scoping. Per-builder GROUP BY queries deferred to follow-on execution slice."
+  }
+}

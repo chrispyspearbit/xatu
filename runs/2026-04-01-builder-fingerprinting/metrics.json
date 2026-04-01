@@ -1,0 +1,39 @@
+{
+  "claim_count": 5,
+  "source_count": 2,
+  "row_count_total": 7863275,
+  "join_coverage": null,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "delivery_builders_nonzero",
+      "description": "Delivery data contains a non-trivial number of distinct builders for fingerprinting",
+      "status": "pass",
+      "value": 47
+    },
+    {
+      "name": "bid_builders_nonzero",
+      "description": "Bid trace data contains a non-trivial number of distinct builders for fingerprinting",
+      "status": "pass",
+      "value": 109
+    },
+    {
+      "name": "fingerprint_dimensions_sufficient",
+      "description": "At least 5 distinct fingerprint dimensions are extractable from the available data fields",
+      "status": "pass",
+      "value": "8 dimensions: market share, relay routing breadth, relay routing HHI, mean block value, value variance, gas utilization, bid intensity, num_tx"
+    },
+    {
+      "name": "archetype_classification_feasible",
+      "description": "Builder population and dimension count support meaningful clustering into behavioral archetypes",
+      "status": "pass",
+      "value": "47 builders x 8 dimensions supports 4-5 cluster archetypes"
+    },
+    {
+      "name": "limitations_documented",
+      "description": "Evidence explicitly documents data limitations including date mismatch, single-day windows, and identity ambiguity",
+      "status": "pass",
+      "value": "6 caveats documented: date mismatch, single-day, identity, no MEV attribution, aggregate-only, field availability"
+    }
+  ]
+}
