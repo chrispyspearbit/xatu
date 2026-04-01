@@ -1,0 +1,39 @@
+{
+  "claim_count": 5,
+  "source_count": 8,
+  "row_count_total": 15862448,
+  "join_coverage": null,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "all_methods_assessed",
+      "description": "All 8 prior research methods received a portability classification",
+      "status": "pass",
+      "value": 8
+    },
+    {
+      "name": "portable_method_exists",
+      "description": "At least one method classified as PORTABLE",
+      "status": "pass",
+      "value": "5 PORTABLE: Public-Private Flow, Fingerprinting, Dependency Risk, Opportunity Archive, Feasibility Layer"
+    },
+    {
+      "name": "ethereum_specific_identified",
+      "description": "At least one infrastructure assumption classified as Ethereum-specific",
+      "status": "pass",
+      "value": "5 assumptions: MEV-Boost/PBS, relay architecture, EVM execution, Xatu sentry, slot-based timing"
+    },
+    {
+      "name": "chain_families_assessed",
+      "description": "Portability assessed against multiple chain architecture families",
+      "status": "pass",
+      "value": "3 families: PBS chains, integrated builder, EVM-compatible L2s"
+    },
+    {
+      "name": "evidence_grounded",
+      "description": "Each portability classification cites specific prior run evidence",
+      "status": "pass",
+      "value": "all 8 methods cite specific runs, tables, and metrics"
+    }
+  ]
+}

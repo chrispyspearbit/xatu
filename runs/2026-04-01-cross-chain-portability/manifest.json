@@ -1,0 +1,67 @@
+{
+  "run_id": "2026-04-01-cross-chain-portability",
+  "phase": "Phase 3 — Opportunity and Portability",
+  "question": "Which components of the Xatu MEV research methodology are Ethereum-specific, and which can transfer to other chains with PBS-like or MEV-aware architectures?",
+  "hypothesis": "The research program's methodology splits into three tiers: structural analysis methods are broadly portable, detection heuristics require chain-specific adaptation, and specific data dependencies (MEV-Boost relay protocol, Xatu sentry network, Ethereum trace format) are Ethereum-specific.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The portability framework cleanly separates portable methodology (5 of 8 methods) from Ethereum-specific infrastructure dependencies. Structural analysis methods (concentration metrics, dependency graphs, feasibility scoring) transfer to any chain with analogous market data. The primary portability bottleneck is data schema availability, not methodology design. This framework enables principled scoping of multi-chain research extensions."
+  },
+  "tables_used": [
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "Inherited from Runs 1, 5, 6, 7, 8; builder delivery and market structure"
+    },
+    {
+      "name": "mev_relay_validator_registration",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 5829223,
+      "notes": "Inherited from Runs 1, 6, 7, 8; validator registration and dependency"
+    },
+    {
+      "name": "mev_relay_bid_trace",
+      "date_start": "2024-09-13",
+      "date_end": "2024-09-13",
+      "row_count": 7819236,
+      "notes": "Inherited from Runs 2, 5, 7, 8; auction competition and bid intensity"
+    },
+    {
+      "name": "mempool_transaction",
+      "date_start": "2023-03-03",
+      "date_end": "2023-03-03",
+      "row_count": 1094776,
+      "notes": "Inherited from Runs 3, 7, 8; public mempool visibility baseline"
+    },
+    {
+      "name": "canonical_execution_traces",
+      "date_start": "2023-07-01",
+      "date_end": "2023-07-01",
+      "row_count": 1029073,
+      "notes": "Inherited from Runs 4, 7, 8; MEV taxonomy structural analysis"
+    },
+    {
+      "name": "canonical_execution_transaction",
+      "date_start": "2023-03-10",
+      "date_end": "2023-07-01",
+      "row_count": 46101,
+      "notes": "Inherited from Runs 3, 4, 7, 8; join tests and transaction-level context"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "809ef71",
+    "created_at": "2026-04-01T12:00:00Z",
+    "data_source": "Synthesis of 8 prior validated runs from Xatu public parquet export",
+    "notes": "No new parquet queries executed. Portability assessment reviews all prior research methods and data dependencies for cross-chain transferability."
+  }
+}

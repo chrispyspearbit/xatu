@@ -1,0 +1,32 @@
+[
+  {
+    "title": "L2 MEV Data Availability Survey",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The portability framework identified data availability as the primary bottleneck for cross-chain research extension. Surveying which EVM-compatible L2s (Optimism, Arbitrum, Base, zkSync) publish block attribution, sequencer, and execution trace data in queryable formats would identify the most viable targets for applying the 5 portable methods.",
+    "parent_run_id": "2026-04-01-cross-chain-portability",
+    "depends_on": [],
+    "tables_needed": [],
+    "feasibility": "medium",
+    "expected_value": "high"
+  },
+  {
+    "title": "Solana Block Producer Concentration Study",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The portability framework classified Methods 1, 5, and 6 (market map, fingerprinting, dependency risk) as portable to integrated-builder chains. Solana publishes validator and leader schedule data publicly. Applying these methods to Solana would serve as a proof-of-concept for the portability framework's predictions.",
+    "parent_run_id": "2026-04-01-cross-chain-portability",
+    "depends_on": [],
+    "tables_needed": [],
+    "feasibility": "medium",
+    "expected_value": "high"
+  },
+  {
+    "title": "Portable Method Template Library",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The portability framework identified 5 fully portable methods. Extracting these into chain-agnostic templates (with explicit data schema requirements and parameter placeholders) would make cross-chain application systematic rather than ad-hoc. Each template would specify: required data schema, analytical steps, expected outputs, and chain-specific parameters to calibrate.",
+    "parent_run_id": "2026-04-01-cross-chain-portability",
+    "depends_on": [],
+    "tables_needed": [],
+    "feasibility": "high",
+    "expected_value": "medium"
+  }
+]

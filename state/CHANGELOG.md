@@ -291,3 +291,36 @@ Eighth validated research slice. Agenda item #8: Strategy Feasibility Layer (Pha
 
 ---
 
+## Entry #9 — Cross-Chain Portability Framework — 2026-04-01
+
+### Context
+
+Ninth validated research slice. Agenda item #9: Cross-Chain Portability Framework (Phase 3). This is the third and final Phase 3 seeded item, completing the Opportunity and Portability phase.
+
+### Key Findings
+
+- Five of eight research methods are fully PORTABLE: Public-vs-Private Flow Estimation, Builder Fingerprinting, Dependency/Concentration Risk, Opportunity Archive, and Strategy Feasibility Layer. These encode analytical frameworks, not data format assumptions.
+- Three methods are ADAPTABLE: Builder/Relay Market Map, Auction Microstructure, and Realized MEV Taxonomy. Each has a portable core but requires chain-specific parameter adaptation (relay dimensions, auction format, trace format).
+- The relay layer is a uniquely Ethereum feature affecting 4 of 8 methods, but relay dimensions provide additional depth rather than the sole analytical basis. Removing them reduces granularity without breaking core analysis.
+- EVM compatibility creates a clean portability boundary: MEV taxonomy heuristics transfer completely to EVM-compatible chains or require complete rewrite for non-EVM chains. No partial transfer exists.
+- Data availability — not methodology design — is the true portability bottleneck. A chain that publishes block attribution, auction records, and execution traces enables 5-8 methods immediately.
+
+### Decision
+
+**KEEP** — provides a structured, evidence-grounded separation of portable methodology from Ethereum-specific infrastructure dependencies. Completes Phase 3: opportunity classification (Run 7), feasibility assessment (Run 8), and cross-chain portability (Run 9).
+
+### Limitations
+
+- Structural assessment only; not empirically validated on non-Ethereum chains.
+- Three representative chain families assessed; does not cover all architectures.
+- No data availability verification for specific target chains.
+- Synthesis only; no new parquet queries executed.
+
+### Follow-On Candidates (all held for curation)
+
+1. L2 MEV Data Availability Survey — identify which L2s publish needed data schemas
+2. Solana Block Producer Concentration Study — proof-of-concept for portable methods
+3. Portable Method Template Library — extract chain-agnostic analytical templates
+
+---
+

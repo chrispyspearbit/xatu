@@ -59,7 +59,7 @@ Status key:
 8. [K] Strategy Feasibility Layer
    Goal: estimate which opportunity classes are recurring, public enough, and not obviously dead on arrival.
 
-9. [ ] Cross-Chain Portability Framework
+9. [K] Cross-Chain Portability Framework
    Goal: separate chain-specific heuristics from portable research methodology.
 
 ### Promoted Items
