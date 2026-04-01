@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Per-Slot Bid Distribution Analysis",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "This slice derived mean bids per slot (~1,181) from aggregates. Per-slot GROUP BY on bid trace would reveal the actual distribution shape — variance, outlier slots, and whether high-MEV slots attract disproportionately more bids.",
+    "parent_run_id": "2026-04-01-auction-microstructure",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_bid_trace"],
+    "feasibility": "high",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "Bid Timing Within Slots",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "This slice inferred progressive bid updating from structural evidence. Direct measurement of bid submission timestamps relative to slot boundaries would confirm or refute the last-look hypothesis and quantify the timing distribution.",
+    "parent_run_id": "2026-04-01-auction-microstructure",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_bid_trace"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "Same-Day Bid-to-Delivery Win Rate",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "This slice compared bidders (2024-09-13) to delivered builders (2026-03-29, different date). Joining bid trace and delivery data for the same date would yield exact per-builder win rates, eliminating the date mismatch caveat.",
+    "parent_run_id": "2026-04-01-auction-microstructure",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_bid_trace", "mev_relay_proposer_payload_delivered"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  }
+]

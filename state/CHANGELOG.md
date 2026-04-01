@@ -65,4 +65,36 @@ First validated research slice. Agenda item #1: Builder / Relay Market Map (Phas
 3. Builder Win Rate from Bid Traces — join bid and delivery for same window
 
 ---
+## Entry #2 — Auction Microstructure — 2026-04-01
+
+### Context
+
+Second validated research slice. Agenda item #2: Auction Microstructure (Phase 1).
+
+### Key Findings
+
+- ~1,181 bids per slot on 2024-09-13 across 6,620 slots, indicating extremely intense auction competition.
+- 109 unique builders submitted bids; cross-referencing with delivery data (different date) shows ~57% builder attrition from bidding to winning.
+- Each builder submitted ~10.8 bids per slot (including relay duplication), consistent with progressive bid updating across ~8 relays with ~1.4 revisions per relay.
+- Per-bid win rate is ~0.085%; per-builder per-slot win rate is ~1.25-2%.
+- Builder market has three tiers: 3-5 dominant winners, 15-25 occasional winners, 60-80 bidders-only in competitive fringe.
+
+### Decision
+
+**KEEP** — establishes basic auction intensity and competition dimensions. Aggregate metrics provide valid foundations for deeper per-row auction analysis.
+
+### Limitations
+
+- Single-day bid trace window (2024-09-13); dynamics may vary by market regime.
+- Bid trace and delivery data from different dates (~18 months apart).
+- All metrics derived from aggregate statistics; exact per-slot distributions require GROUP BY queries.
+- No bid value analysis or sub-second timing measurement.
+
+### Follow-On Candidates (all held for curation)
+
+1. Per-Slot Bid Distribution Analysis — GROUP BY on slot for exact distribution shape
+2. Bid Timing Within Slots — sub-second timestamp analysis relative to slot boundaries
+3. Same-Day Bid-to-Delivery Win Rate — join bid and delivery for same date
+
+---
 

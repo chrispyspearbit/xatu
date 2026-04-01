@@ -16,7 +16,7 @@ Status key:
    Core tables: `mev_relay_proposer_payload_delivered`, `mev_relay_validator_registration`, `mev_relay_bid_trace`
    Acceptance: one validated run with explicit market-share metrics and concentration metrics.
 
-2. [ ] Auction Microstructure
+2. [K] Auction Microstructure
    Goal: characterize bid timing, competition per slot, and the relationship between bids and delivered outcomes.
    Core tables: `mev_relay_bid_trace`, `mev_relay_proposer_payload_delivered`
    Acceptance: one validated run with slot-level timing distributions and win-pattern analysis.

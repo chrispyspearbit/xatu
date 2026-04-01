@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-04-01-auction-microstructure",
+  "phase": "Phase 1 — Foundations",
+  "question": "What does the MEV-Boost auction microstructure look like at the slot level — how many bids are submitted, how many builders compete, and what patterns distinguish winning from losing bids?",
+  "hypothesis": "The MEV-Boost auction is intensely competitive at the slot level: many builders submit many bids per slot, most bids lose, and the auction resembles a sealed-bid ascending auction with multiple revisions.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The slice establishes basic auction microstructure dimensions (intensity, competition, timing patterns) and confirms Xatu bid trace data supports auction analysis. Aggregate metrics provide valid foundations for deeper per-row studies."
+  },
+  "tables_used": [
+    {
+      "name": "mev_relay_bid_trace",
+      "date_start": "2024-09-13",
+      "date_end": "2024-09-13",
+      "row_count": 7819236,
+      "notes": "Primary source for auction microstructure metrics"
+    },
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "Cross-reference for delivery outcomes (different date)"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "5b8bbda",
+    "created_at": "2026-04-01T06:00:00Z",
+    "data_source": "Xatu public parquet export via ethpandaops",
+    "notes": "Metrics derived from scoping observations in research/data-scope.md. Per-slot distributions and bid value analysis require GROUP BY queries not yet executed."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "claim_count": 4,
+  "source_count": 2,
+  "row_count_total": 7863275,
+  "join_coverage": null,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "bid_trace_rows_nonzero",
+      "description": "Bid trace row count is positive",
+      "status": "pass",
+      "value": 7819236
+    },
+    {
+      "name": "slot_count_nonzero",
+      "description": "Unique slot count is positive",
+      "status": "pass",
+      "value": 6620
+    },
+    {
+      "name": "builder_count_nonzero",
+      "description": "Unique bidding builder count is positive",
+      "status": "pass",
+      "value": 109
+    },
+    {
+      "name": "bids_per_slot_reasonable",
+      "description": "Mean bids per slot is between 1 and 10000",
+      "status": "pass",
+      "value": 1181
+    },
+    {
+      "name": "date_range_explicit",
+      "description": "All tables have explicit date ranges",
+      "status": "pass",
+      "value": "2024-09-13 (bid trace), 2026-03-29 (delivery cross-reference)"
+    }
+  ]
+}
