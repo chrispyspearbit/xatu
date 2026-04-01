@@ -192,4 +192,37 @@ Fifth validated research slice. Agenda item #5: Builder Fingerprinting (Phase 2)
 3. Builder MEV Composition Attribution — join builder blocks with MEV taxonomy for type-level fingerprints
 
 ---
+## Entry #6 — Validator / Proposer Dependency and Concentration Risk — 2026-04-01
+
+### Context
+
+Sixth validated research slice. Agenda item #6: Validator / Proposer Dependency and Concentration Risk (Phase 2). This is the third and final Phase 2 seeded item, completing the extraction and behavioral modeling foundations.
+
+### Key Findings
+
+- Validators register with an average of 6.35 out of 9 available relays (~70.6% breadth), providing substantial relay-level redundancy. Estimated relay registration HHI is 0.11-0.14 (low concentration).
+- The 917,424 registered validators map to only 24,501 fee recipients — a 37.4:1 aggregation ratio — meaning a small number of staking pool operators hold outsized leverage over relay and builder ecosystem viability.
+- Builder dependency is the primary concentration risk: top-3 builders estimated at 55-75% of delivered blocks (HHI 0.15-0.25), and all validators share this dependency through MEV-Boost's auction mechanism.
+- The dependency structure is asymmetric: relay failure is low risk (most blocks have 6+ alternative relay paths), but builder failure is high risk (no relay compensation for missing MEV extraction value).
+- A three-layer dependency model emerges: staking pool operators → validators → builders (via relays). Concentration compounds across layers.
+
+### Decision
+
+**KEEP** — establishes the dependency graph structure, quantifies asymmetric risk, and documents concentration scenarios. Structural findings are robust; quantitative bounds need per-entity GROUP BY execution to narrow.
+
+### Limitations
+
+- Single-day window (2026-03-29); all metrics are point-in-time.
+- Bounded estimates only; no per-entity GROUP BY queries executed.
+- Fee recipient ≠ operator identity (understates true operator concentration).
+- No revenue/value weighting; block count is the unit.
+- Builder identity ambiguity (pubkey ≠ organization).
+
+### Follow-On Candidates (all held for curation)
+
+1. Per-Fee-Recipient Validator Count Distribution — exact operator concentration via GROUP BY
+2. Per-Validator Relay Registration Breadth Distribution — identify under-registered cohorts
+3. Fee-Recipient-to-Builder Delivery Concentration — realized dependency via registration-delivery join
+
+---
 

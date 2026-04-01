@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Per-Fee-Recipient Validator Count Distribution",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice showed a 37.4:1 validator-to-fee-recipient aggregation ratio but only bounded the distribution. A GROUP BY on fee_recipient would reveal the exact distribution shape, top-N operator share, and the precise HHI — replacing estimates with ground truth.",
+    "parent_run_id": "2026-04-01-validator-proposer-dependency",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_validator_registration"],
+    "feasibility": "high",
+    "expected_value": "high"
+  },
+  {
+    "title": "Per-Validator Relay Registration Breadth Distribution",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice computed average registration breadth (6.35/9) but the distribution could be bimodal — solo stakers may register with fewer relays while pools register comprehensively. GROUP BY on validator pubkey would reveal the actual breadth distribution and identify under-registered validator cohorts.",
+    "parent_run_id": "2026-04-01-validator-proposer-dependency",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_validator_registration"],
+    "feasibility": "high",
+    "expected_value": "medium"
+  },
+  {
+    "title": "Fee-Recipient-to-Builder Delivery Concentration",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice identified builder dependency as the primary concentration risk but did not join validator registrations to delivered payloads. Joining on proposer_fee_recipient would reveal which builder(s) each large staking pool actually receives blocks from — measuring realized dependency rather than market-level estimates.",
+    "parent_run_id": "2026-04-01-validator-proposer-dependency",
+    "depends_on": ["Per-Fee-Recipient Validator Count Distribution"],
+    "tables_needed": ["mev_relay_validator_registration", "mev_relay_proposer_payload_delivered"],
+    "feasibility": "medium",
+    "expected_value": "high"
+  }
+]

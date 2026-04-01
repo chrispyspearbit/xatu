@@ -41,7 +41,7 @@ Status key:
 5. [K] Builder Fingerprinting
    Goal: cluster builders by stable block-construction style and MEV composition.
 
-6. [ ] Validator / Proposer Dependency and Concentration Risk
+6. [K] Validator / Proposer Dependency and Concentration Risk
    Goal: measure relay and builder dependence across validator cohorts.
 
 ### Promoted Items

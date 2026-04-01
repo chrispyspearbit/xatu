@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-04-01-validator-proposer-dependency",
+  "phase": "Phase 2 — Extraction and Behavioral Modeling",
+  "question": "How dependent are Ethereum validators on specific relays and builders for block production, and what concentration risks emerge from fee recipient aggregation?",
+  "hypothesis": "Validator relay registration is broadly distributed, but the delivered block pipeline is highly concentrated through a small number of builders. Fee recipient aggregation further concentrates effective decision-making power over relay and builder selection, creating a three-layer dependency structure with asymmetric risk.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "Establishes the three-layer dependency structure (operators → validators → builders), quantifies asymmetric relay vs builder concentration risk, and documents scenario impacts. Structural findings are robust; quantitative bounds need per-entity queries to narrow. Confidence is medium due to bounded estimates without per-entity GROUP BY execution."
+  },
+  "tables_used": [
+    {
+      "name": "mev_relay_validator_registration",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 5829223,
+      "notes": "917,424 unique validators, 24,501 fee recipients, 9 relays; supports relay registration breadth and fee recipient aggregation analysis"
+    },
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "6,597 unique delivered blocks, 47 builders, 8 relays; supports builder concentration and relay delivery analysis. Builder share estimates from prior validated slice (Entry #1)."
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "fa40041",
+    "created_at": "2026-04-01T10:00:00Z",
+    "data_source": "Xatu public parquet export via ethpandaops",
+    "notes": "Structural dependency and concentration analysis using validator registration and relay delivery data. Builder share estimates reuse bounded values from validated Entry #1 (Builder / Relay Market Map). Per-entity GROUP BY queries deferred to follow-on slices."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "claim_count": 5,
+  "source_count": 2,
+  "row_count_total": 5873262,
+  "join_coverage": null,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "validators_nonzero",
+      "description": "Registration data contains a non-trivial number of unique validators for dependency analysis",
+      "status": "pass",
+      "value": 917424
+    },
+    {
+      "name": "fee_recipients_nonzero",
+      "description": "Fee recipient count supports meaningful aggregation analysis",
+      "status": "pass",
+      "value": 24501
+    },
+    {
+      "name": "relay_count_sufficient",
+      "description": "Multiple relays exist to measure registration breadth and delivery concentration",
+      "status": "pass",
+      "value": "9 registration relays, 8 delivery relays"
+    },
+    {
+      "name": "builder_count_sufficient",
+      "description": "Builder population supports meaningful concentration analysis",
+      "status": "pass",
+      "value": 47
+    },
+    {
+      "name": "concentration_scenarios_documented",
+      "description": "At least one concentration risk scenario quantified with estimated impact",
+      "status": "pass",
+      "value": "4 scenarios: top-1 builder offline (20-35% impact), top-3 builders offline (55-75%), top-1 relay offline (<5%), top-2 relays offline (5-15%)"
+    },
+    {
+      "name": "limitations_documented",
+      "description": "Evidence explicitly documents data limitations",
+      "status": "pass",
+      "value": "7 caveats documented: single-day, no GROUP BY, identity ambiguity, no value weighting, registration vs delivery, static snapshot, builder identity"
+    }
+  ]
+}
