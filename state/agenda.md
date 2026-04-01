@@ -21,7 +21,7 @@ Status key:
    Core tables: `mev_relay_bid_trace`, `mev_relay_proposer_payload_delivered`
    Acceptance: one validated run with slot-level timing distributions and win-pattern analysis.
 
-3. [ ] Public-vs-Private Flow Estimation
+3. [K] Public-vs-Private Flow Estimation
    Goal: estimate what share of included flow appears in the public mempool and how that varies by context.
    Core tables: `mempool_transaction`, `canonical_execution_transaction`, `mev_relay_proposer_payload_delivered`
    Acceptance: one validated run with coverage estimates, methodology, and caveats.

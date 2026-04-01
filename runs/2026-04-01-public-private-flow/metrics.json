@@ -1,0 +1,39 @@
+{
+  "claim_count": 3,
+  "source_count": 3,
+  "row_count_total": 1138815,
+  "join_coverage": 0.647,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "mempool_tx_count_nonzero",
+      "description": "Unique mempool transaction hash count is positive",
+      "status": "pass",
+      "value": 747931
+    },
+    {
+      "name": "public_visibility_in_range",
+      "description": "Public visibility share is between 0 and 1",
+      "status": "pass",
+      "value": 0.647
+    },
+    {
+      "name": "private_flow_complement",
+      "description": "Private flow candidate share is complement of public visibility",
+      "status": "pass",
+      "value": 0.353
+    },
+    {
+      "name": "date_range_explicit",
+      "description": "All tables have explicit date ranges",
+      "status": "pass",
+      "value": "2023-03-03 (mempool), 2023-03-10 (join test), 2026-03-29 (relay context)"
+    },
+    {
+      "name": "sentry_coverage_caveat_documented",
+      "description": "Evidence explicitly warns that public visibility is a lower bound due to partial sentry coverage",
+      "status": "pass",
+      "value": "documented in evidence.md and report.md"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 run_id	phase	agenda_item	status	decision	confidence	data_window	tables	row_count_total	join_coverage	report_path	notes
 2026-04-01-builder-relay-market-map	1	Builder / Relay Market Map	complete	KEEP	medium	2026-03-29	mev_relay_proposer_payload_delivered,mev_relay_validator_registration,mev_relay_bid_trace	13692498	0.9999	runs/2026-04-01-builder-relay-market-map/report.md	Single-day snapshot; bounded concentration estimates; exact per-builder breakdown deferred
 2026-04-01-auction-microstructure	1	Auction Microstructure	complete	KEEP	medium	2024-09-13	mev_relay_bid_trace,mev_relay_proposer_payload_delivered	7863275		runs/2026-04-01-auction-microstructure/report.md	Single-day bid trace; aggregate-only metrics; per-slot distributions and bid timing deferred
+2026-04-01-public-private-flow	1	Public-vs-Private Flow Estimation	complete	KEEP	medium	2023-03-03	mempool_transaction,canonical_execution_transaction,mev_relay_proposer_payload_delivered	1138815	0.647	runs/2026-04-01-public-private-flow/report.md	Single-day join test; ~64.7% public visibility; builder stratification deferred due to date mismatch
 

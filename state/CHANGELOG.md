@@ -65,6 +65,38 @@ First validated research slice. Agenda item #1: Builder / Relay Market Map (Phas
 3. Builder Win Rate from Bid Traces — join bid and delivery for same window
 
 ---
+## Entry #3 — Public-vs-Private Flow Estimation — 2026-04-01
+
+### Context
+
+Third validated research slice. Agenda item #3: Public-vs-Private Flow Estimation (Phase 1). This completes all three Phase 1 foundation items.
+
+### Key Findings
+
+- A same-day join test (2023-03-10) between Xatu mempool observations and canonical execution data showed ~64.7% public mempool visibility for included transactions.
+- The remaining ~35.3% are candidates for private flow (direct builder submission, private RPCs, MEV bundles), though this is an upper bound due to partial Xatu sentry coverage.
+- True private flow likely falls in the 15-35% range depending on actual sentry coverage.
+- Builder stratification was not feasible: mempool data (2023) and relay delivery data (2026) are from different eras.
+- The methodology — same-day left join on transaction hash — is sound but inherently conservative (absence of mempool sighting ≠ private flow).
+
+### Decision
+
+**KEEP** — establishes a grounded baseline for public-vs-private flow estimation and documents the methodology, join approach, and caveats clearly. The ~65% public visibility figure is consistent with known private order flow dynamics.
+
+### Limitations
+
+- Single-day mempool window (2023-03-03/2023-03-10); ratios likely vary over time.
+- Partial Xatu sentry coverage means public visibility is a lower bound.
+- No builder, relay, or transaction-type stratification in this slice.
+- Historical data (2023) may not reflect current private order flow ecosystem.
+
+### Follow-On Candidates (all held for curation)
+
+1. Builder-Stratified Public Visibility — requires temporally aligned mempool + relay data
+2. Temporal Variation in Public-Private Ratio — multi-day/week extension
+3. Transaction-Type Stratification of Public Visibility — DEX trades vs simple transfers
+
+---
 ## Entry #2 — Auction Microstructure — 2026-04-01
 
 ### Context

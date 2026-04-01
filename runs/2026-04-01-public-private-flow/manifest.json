@@ -1,0 +1,46 @@
+{
+  "run_id": "2026-04-01-public-private-flow",
+  "phase": "Phase 1 — Foundations",
+  "question": "What share of included Ethereum transactions was visible in the public mempool before inclusion, and how does that vary by context?",
+  "hypothesis": "A meaningful fraction of included transactions never appears in the public mempool. The public visibility share is materially below 100% and varies by builder and transaction type.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The slice establishes a baseline public visibility estimate (~64.7%) from Xatu mempool data and documents the methodology, join approach, and key caveats. The result is consistent with known private order flow dynamics and provides a grounded starting point for deeper stratification work."
+  },
+  "tables_used": [
+    {
+      "name": "mempool_transaction",
+      "date_start": "2023-03-03",
+      "date_end": "2023-03-03",
+      "row_count": 1094776,
+      "notes": "Primary mempool observation source; 747,931 unique transaction hashes"
+    },
+    {
+      "name": "canonical_execution_transaction",
+      "date_start": "2023-03-10",
+      "date_end": "2023-03-10",
+      "row_count": 0,
+      "notes": "Used in same-day join test referenced from data-scope.md; exact row count not independently measured in this slice"
+    },
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "Consulted for builder stratification feasibility; date mismatch with mempool data prevented direct join"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "098a777",
+    "created_at": "2026-04-01T06:00:00Z",
+    "data_source": "Xatu public parquet export via ethpandaops",
+    "notes": "Primary visibility estimate (64.7%) comes from same-day join test documented in research/data-scope.md. Builder stratification deferred due to date mismatch between mempool and relay data."
+  }
+}

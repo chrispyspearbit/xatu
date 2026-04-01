@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Builder-Stratified Public Visibility",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "This slice showed ~64.7% overall public visibility but could not stratify by builder due to date mismatch. Temporally aligned mempool + relay delivery data would reveal whether builders with known private order flow relationships show lower public visibility rates.",
+    "parent_run_id": "2026-04-01-public-private-flow",
+    "depends_on": [],
+    "tables_needed": ["mempool_transaction", "canonical_execution_transaction", "mev_relay_proposer_payload_delivered"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "Temporal Variation in Public-Private Ratio",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "The ~64.7% public visibility estimate is from a single day. Multi-day or multi-week analysis would reveal whether the ratio is stable or varies with gas prices, MEV conditions, or time of day.",
+    "parent_run_id": "2026-04-01-public-private-flow",
+    "depends_on": [],
+    "tables_needed": ["mempool_transaction", "canonical_execution_transaction"],
+    "feasibility": "high",
+    "expected_value": "medium",
+    "admission": "hold"
+  },
+  {
+    "title": "Transaction-Type Stratification of Public Visibility",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "This slice treated all transactions uniformly. DEX trades, high-value transfers, and contract deployments likely have different public visibility profiles. Stratifying by transaction type would identify which classes are most susceptible to private routing.",
+    "parent_run_id": "2026-04-01-public-private-flow",
+    "depends_on": [],
+    "tables_needed": ["mempool_transaction", "canonical_execution_transaction"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  }
+]
