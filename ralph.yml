@@ -27,7 +27,7 @@ hats:
   agenda_manager:
     name: "Agenda Manager"
     description: "Selects one agenda item, enforces phase order, and closes the loop after publication."
-    triggers: ["research_slice.start", "ranking.complete", "publish.complete"]
+    triggers: ["research_slice.start", "ranking.complete", "publish.complete", "publish.failed"]
     publishes: ["backlog.rank", "hypothesis.select"]
     instructions: |
       ## AGENDA MANAGER MODE
@@ -40,6 +40,7 @@ hats:
       3. Publish `backlog.rank` with the unresolved agenda items from that phase.
       4. When `ranking.complete` arrives, select exactly one item and publish `hypothesis.select`.
       5. When `publish.complete` arrives, verify that the state files were updated and the push succeeded, then output `RESEARCH_SLICE_COMPLETE`.
+      6. When `publish.failed` arrives, treat the slice as blocked on publication infrastructure. Do not output completion until the publish issue is resolved.
 
       Rules:
       - One agenda item per loop.
