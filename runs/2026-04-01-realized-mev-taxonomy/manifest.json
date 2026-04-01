@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-04-01-realized-mev-taxonomy",
+  "phase": "Phase 2 — Extraction and Behavioral Modeling",
+  "question": "What MEV patterns can be classified from Ethereum canonical execution traces, and what is the structural distribution of realized MEV types in a representative block range?",
+  "hypothesis": "Canonical execution traces contain sufficient structural information to classify realized MEV into distinct categories (arbitrage, sandwich, liquidation, backrun) based on call patterns, value flows, and intra-block transaction positioning. The distribution is dominated by a small number of pattern types.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The slice establishes that Xatu canonical execution traces support structural classification of at least four MEV types (arbitrage, sandwich, liquidation, backrunning) using call patterns, value flows, and intra-block positioning. The taxonomy provides a reusable framework for follow-on per-transaction classification. Confidence is medium due to aggregate-level analysis without per-transaction query execution."
+  },
+  "tables_used": [
+    {
+      "name": "canonical_execution_traces",
+      "date_start": "2023-07-01",
+      "date_end": "2023-07-01",
+      "row_count": 1029073,
+      "notes": "Block range around 20,000,000 (~700 blocks); 146,734 unique transactions; ~7.01 traces per transaction average"
+    },
+    {
+      "name": "canonical_execution_transaction",
+      "date_start": "2023-07-01",
+      "date_end": "2023-07-01",
+      "row_count": 0,
+      "notes": "Referenced for transaction-level context (from, to, value, gas_price, transaction_index); not independently row-counted in this slice"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "e9db152",
+    "created_at": "2026-04-01T07:00:00Z",
+    "data_source": "Xatu public parquet export via ethpandaops",
+    "notes": "Structural feasibility analysis of trace data for MEV taxonomy. Row counts and field availability from prior scoping (research/data-scope.md). Per-transaction classification queries deferred to follow-on slice."
+  }
+}

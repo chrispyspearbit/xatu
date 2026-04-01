@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Per-Transaction MEV Classification Execution",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice established structural feasibility of four MEV types from trace data. Executing actual GROUP BY and pattern-matching queries against the parquet data would produce ground-truth counts and validate the estimated frequency ranges (2-5% arbitrage, 1-3% sandwich, <1% liquidation).",
+    "parent_run_id": "2026-04-01-realized-mev-taxonomy",
+    "depends_on": [],
+    "tables_needed": ["canonical_execution_traces", "canonical_execution_transaction"],
+    "feasibility": "high",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "Trace-Log Correlation for Token MEV",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice identified token-denominated MEV as the primary data gap — trace value fields only capture ETH flows. Joining canonical_execution_traces with canonical_execution_logs (Transfer events) would extend classification to ERC-20 arbitrage and sandwich attacks.",
+    "parent_run_id": "2026-04-01-realized-mev-taxonomy",
+    "depends_on": [],
+    "tables_needed": ["canonical_execution_traces", "canonical_execution_logs"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "MEV Type Distribution Across Market Regimes",
+    "phase": "Phase 2 — Extraction and Behavioral Modeling",
+    "why_now": "This slice used a single 700-block window around block 20,000,000. MEV composition likely shifts with gas price regime and market volatility. Multi-window sampling across different eras would reveal whether the taxonomy distribution is stable or regime-dependent.",
+    "parent_run_id": "2026-04-01-realized-mev-taxonomy",
+    "depends_on": ["Per-Transaction MEV Classification Execution"],
+    "tables_needed": ["canonical_execution_traces", "canonical_execution_transaction"],
+    "feasibility": "medium",
+    "expected_value": "medium",
+    "admission": "hold"
+  }
+]

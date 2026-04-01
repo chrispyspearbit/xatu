@@ -35,7 +35,7 @@ Status key:
 
 ### Seeded Items
 
-4. [ ] Realized MEV Taxonomy
+4. [K] Realized MEV Taxonomy
    Goal: classify realized MEV patterns from canonical execution traces and logs.
 
 5. [ ] Builder Fingerprinting

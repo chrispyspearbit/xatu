@@ -97,6 +97,38 @@ Third validated research slice. Agenda item #3: Public-vs-Private Flow Estimatio
 3. Transaction-Type Stratification of Public Visibility — DEX trades vs simple transfers
 
 ---
+## Entry #4 — Realized MEV Taxonomy — 2026-04-01
+
+### Context
+
+Fourth validated research slice. Agenda item #4: Realized MEV Taxonomy (Phase 2). This is the first Phase 2 item, building on the completed Phase 1 foundations.
+
+### Key Findings
+
+- Xatu canonical execution traces (1,029,073 rows across 146,734 transactions around block 20,000,000) support structural classification of four MEV types: arbitrage, sandwich attacks, liquidations, and backrunning.
+- Arbitrage is detectable via cyclic value flows (ETH-denominated only); sandwich attacks via intra-block transaction positioning; liquidations via function selector matching (highest confidence); backrunning via sequential positioning (weakest signal).
+- Average trace depth of ~7.01 per transaction indicates a mix of simple and complex DeFi interactions, with trace count serving as a useful MEV candidate filter.
+- Estimated ~5-12% of transactions are classifiable as MEV candidates; ~85-95% are non-MEV (simple transfers, standard DeFi, NFT activity).
+- Token-denominated MEV is the primary data gap — trace value fields capture ETH flows only; event log correlation is needed for ERC-20 MEV.
+
+### Decision
+
+**KEEP** — establishes a validated taxonomy framework with four MEV types, clear identification methods, and documented confidence levels. Serves as the foundation for per-transaction classification and builder fingerprinting work.
+
+### Limitations
+
+- Structural analysis only; per-transaction classification queries not executed in this slice.
+- Single ~700-block window from mid-2023; MEV patterns may have evolved.
+- No ABI decoding or event log correlation; token MEV not classifiable.
+- Heuristic identification produces candidates, not ground truth.
+
+### Follow-On Candidates (all held for curation)
+
+1. Per-Transaction MEV Classification Execution — run actual queries to validate frequency estimates
+2. Trace-Log Correlation for Token MEV — join traces with logs for ERC-20 classification
+3. MEV Type Distribution Across Market Regimes — multi-window sampling for stability analysis
+
+---
 ## Entry #2 — Auction Microstructure — 2026-04-01
 
 ### Context

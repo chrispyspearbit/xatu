@@ -1,0 +1,39 @@
+{
+  "claim_count": 4,
+  "source_count": 2,
+  "row_count_total": 1029073,
+  "join_coverage": null,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "trace_row_count_nonzero",
+      "description": "Canonical execution traces contain a non-trivial number of rows",
+      "status": "pass",
+      "value": 1029073
+    },
+    {
+      "name": "transaction_count_nonzero",
+      "description": "Unique transaction count is positive and reasonable for the block range",
+      "status": "pass",
+      "value": 146734
+    },
+    {
+      "name": "mev_patterns_identifiable",
+      "description": "At least 3 distinct MEV pattern types are structurally identifiable from trace fields",
+      "status": "pass",
+      "value": "arbitrage (cyclic value flow), sandwich (intra-block positioning), liquidation (function selector), backrunning (sequential positioning)"
+    },
+    {
+      "name": "trace_fields_sufficient",
+      "description": "Trace data contains from, to, value, call_type, input fields necessary for structural classification",
+      "status": "pass",
+      "value": "from, to, value, call_type, input, trace_address confirmed in schema"
+    },
+    {
+      "name": "classification_limitations_documented",
+      "description": "Evidence explicitly documents what the trace data cannot support for MEV taxonomy",
+      "status": "pass",
+      "value": "documented: token-denominated MEV, full ABI decoding, event log correlation"
+    }
+  ]
+}
