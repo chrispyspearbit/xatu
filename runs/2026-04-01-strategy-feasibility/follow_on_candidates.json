@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Trace-Log Correlation for Token MEV Detection",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The feasibility layer identified token-denominated MEV as the single biggest bottleneck limiting four of six opportunity classes. Joining canonical_execution_traces with canonical_execution_logs (ERC-20 Transfer events) would upgrade both MARGINAL classes and potentially reveal new opportunity classes not visible in ETH-only traces.",
+    "parent_run_id": "2026-04-01-strategy-feasibility",
+    "depends_on": [],
+    "tables_needed": ["canonical_execution_traces", "canonical_execution_logs"],
+    "feasibility": "medium",
+    "expected_value": "high"
+  },
+  {
+    "title": "Multi-Day Builder Market Share Stability",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The feasibility layer assessed builder market position as FEASIBLE but flagged temporal stability as unknown. All current estimates derive from single-day windows. Multi-day analysis of builder market share would validate or refute the recurrence assumption for the highest-priority research track.",
+    "parent_run_id": "2026-04-01-strategy-feasibility",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_proposer_payload_delivered"],
+    "feasibility": "high",
+    "expected_value": "high"
+  },
+  {
+    "title": "Per-Builder Exact Market Share Execution",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The feasibility layer confirmed builder market position as the primary research track. The current bounded estimates (top-3: 55-75%, HHI: 0.15-0.25) need exact per-builder GROUP BY queries to produce precise concentration metrics for the FEASIBLE class.",
+    "parent_run_id": "2026-04-01-strategy-feasibility",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_proposer_payload_delivered"],
+    "feasibility": "high",
+    "expected_value": "high"
+  }
+]

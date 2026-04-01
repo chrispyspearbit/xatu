@@ -1,0 +1,67 @@
+{
+  "run_id": "2026-04-01-strategy-feasibility",
+  "phase": "Phase 3 — Opportunity and Portability",
+  "question": "Which of the six archived MEV opportunity classes are recurring, public enough to observe from Xatu data, and not obviously dead on arrival given the competitive landscape?",
+  "hypothesis": "Of the six archived classes, only a subset will pass a multi-dimensional feasibility screen. Structural/systemic classes relying on fully public relay data will score highest; classes requiring private order flow access or dominated by Tier 1 builders will be assessed as infeasible for independent strategy development.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The feasibility layer separates the six archived opportunity classes into three tiers: two fully feasible for research/analytics (builder market position, validator dependency risk), two marginal (ETH arbitrage detection, liquidation monitoring), and two dead on arrival for independent execution (sandwich, backrunning). The observability and competition filters produce a clear, evidence-backed ranking that constrains the strategy space for downstream work."
+  },
+  "tables_used": [
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "Inherited from Runs 1, 5, 6, 7; builder delivery and market structure"
+    },
+    {
+      "name": "mev_relay_validator_registration",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 5829223,
+      "notes": "Inherited from Runs 1, 6, 7; validator registration and dependency"
+    },
+    {
+      "name": "mev_relay_bid_trace",
+      "date_start": "2024-09-13",
+      "date_end": "2024-09-13",
+      "row_count": 7819236,
+      "notes": "Inherited from Runs 2, 5, 7; auction competition and bid intensity"
+    },
+    {
+      "name": "mempool_transaction",
+      "date_start": "2023-03-03",
+      "date_end": "2023-03-03",
+      "row_count": 1094776,
+      "notes": "Inherited from Runs 3, 7; public mempool visibility baseline"
+    },
+    {
+      "name": "canonical_execution_traces",
+      "date_start": "2023-07-01",
+      "date_end": "2023-07-01",
+      "row_count": 1029073,
+      "notes": "Inherited from Runs 4, 7; MEV taxonomy structural analysis"
+    },
+    {
+      "name": "canonical_execution_transaction",
+      "date_start": "2023-03-10",
+      "date_end": "2023-07-01",
+      "row_count": 46101,
+      "notes": "Inherited from Runs 3, 4, 7; join tests and transaction-level context"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "d558041",
+    "created_at": "2026-04-01T10:00:00Z",
+    "data_source": "Synthesis of 7 prior validated runs from Xatu public parquet export",
+    "notes": "No new parquet queries executed. Feasibility assessment applies structured scoring to the Opportunity Archive (Run 7) using evidence from all prior runs."
+  }
+}

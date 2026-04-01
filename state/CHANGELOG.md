@@ -257,4 +257,37 @@ Seventh validated research slice. Agenda item #7: Opportunity Archive (Phase 3).
 3. Trace-Log Correlation for Token MEV Archive Extension — extend archive to ERC-20 MEV classes
 
 ---
+## Entry #8 — Strategy Feasibility Layer — 2026-04-01
+
+### Context
+
+Eighth validated research slice. Agenda item #8: Strategy Feasibility Layer (Phase 3). This is the second Phase 3 item, applying a structured feasibility framework to the six opportunity classes archived in Run 7.
+
+### Key Findings
+
+- Six opportunity classes were assessed on four dimensions (recurrence, public observability, competition barrier, data sufficiency) and assigned a feasibility verdict.
+- Two classes are **FEASIBLE** for Xatu-based research: Builder Market Position and Validator Dependency Risk. Both rely entirely on public relay data, face no execution competition, and have strong data support.
+- Two classes are **MARGINAL**: ETH-Denominated Arbitrage and Liquidation MEV. Both are detectable post-inclusion and useful for analytics, but limited by the token MEV gap and extreme/high competition barriers.
+- Two classes are **DEAD ON ARRIVAL**: Sandwich Attacks (requires builder integration) and Backrunning (weakest detection signal, ambiguous without log correlation).
+- The observability-competition divide is structural: classes depending on public relay data are fully feasible; classes depending on transaction-level MEV detection require infrastructure beyond Xatu's public scope.
+- Token-denominated MEV is the single biggest bottleneck — resolving it (via trace-log correlation) would upgrade both MARGINAL classes.
+
+### Decision
+
+**KEEP** — provides an evidence-grounded three-tier ranking (FEASIBLE / MARGINAL / DOA) that directly constrains the strategy space for the remainder of the research program. The token MEV bottleneck identification is the most actionable finding for program planning.
+
+### Limitations
+
+- Qualitative framework; no execution cost or profit modeling.
+- All recurrence assessments are structural reasoning, not multi-day empirical evidence.
+- Feasibility assessed relative to Xatu public data only.
+- Synthesis only; no new parquet queries executed.
+
+### Follow-On Candidates (all held for curation)
+
+1. Trace-Log Correlation for Token MEV Detection — highest-leverage data gap resolution
+2. Multi-Day Builder Market Share Stability — temporal validation for top research track
+3. Per-Builder Exact Market Share Execution — precise concentration metrics for FEASIBLE class
+
+---
 

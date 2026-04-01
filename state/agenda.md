@@ -56,7 +56,7 @@ Status key:
 7. [K] Opportunity Archive
    Goal: turn validated classifications into a historical opportunity library.
 
-8. [ ] Strategy Feasibility Layer
+8. [K] Strategy Feasibility Layer
    Goal: estimate which opportunity classes are recurring, public enough, and not obviously dead on arrival.
 
 9. [ ] Cross-Chain Portability Framework

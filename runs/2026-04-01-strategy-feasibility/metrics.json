@@ -1,0 +1,39 @@
+{
+  "claim_count": 5,
+  "source_count": 7,
+  "row_count_total": 15862448,
+  "join_coverage": null,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "all_classes_assessed",
+      "description": "All 6 opportunity classes from the archive received a feasibility assessment",
+      "status": "pass",
+      "value": 6
+    },
+    {
+      "name": "multi_dimensional_scoring",
+      "description": "Each class scored on recurrence, observability, competition, and data sufficiency with evidence citations",
+      "status": "pass",
+      "value": "4 dimensions per class, all citing specific prior runs"
+    },
+    {
+      "name": "feasible_class_exists",
+      "description": "At least one class assessed as FEASIBLE",
+      "status": "pass",
+      "value": "2 FEASIBLE: Builder Market Position, Validator Dependency Risk"
+    },
+    {
+      "name": "non_feasible_class_exists",
+      "description": "At least one class assessed as DOA or MARGINAL",
+      "status": "pass",
+      "value": "2 DOA (Sandwich, Backrunning), 2 MARGINAL (ETH Arb, Liquidation)"
+    },
+    {
+      "name": "verdicts_cite_evidence",
+      "description": "Each verdict references specific evidence from prior validated runs",
+      "status": "pass",
+      "value": "all 6 verdicts cite specific runs and metrics"
+    }
+  ]
+}
