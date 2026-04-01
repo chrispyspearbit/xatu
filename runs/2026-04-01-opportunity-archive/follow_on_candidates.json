@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Per-Transaction MEV Classification Execution",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The opportunity archive uses structural frequency estimates (e.g., arbitrage at 2-5% of transactions). Executing actual GROUP BY and pattern-matching queries against canonical_execution_traces would produce ground-truth counts for each archived class, replacing bounded estimates with empirical data.",
+    "parent_run_id": "2026-04-01-opportunity-archive",
+    "depends_on": [],
+    "tables_needed": ["canonical_execution_traces", "canonical_execution_transaction"],
+    "feasibility": "high",
+    "expected_value": "high"
+  },
+  {
+    "title": "Temporal Stability of Opportunity Class Prevalence",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "Every opportunity class in the archive has 'temporal stability: unknown' because all estimates come from single-day windows. Multi-day or multi-week sampling of the same tables would reveal whether class frequencies and competitive intensities are stable or regime-dependent — a critical input for strategy feasibility.",
+    "parent_run_id": "2026-04-01-opportunity-archive",
+    "depends_on": [],
+    "tables_needed": ["canonical_execution_traces", "mev_relay_proposer_payload_delivered", "mev_relay_bid_trace"],
+    "feasibility": "medium",
+    "expected_value": "high"
+  },
+  {
+    "title": "Trace-Log Correlation for Token MEV Archive Extension",
+    "phase": "Phase 3 — Opportunity and Portability",
+    "why_now": "The archive identifies token-denominated MEV as the primary data gap — ETH-only trace analysis misses the most economically significant MEV classes. Joining canonical_execution_traces with canonical_execution_logs (ERC-20 Transfer events) would extend the archive to cover token arbitrage and sandwich classes.",
+    "parent_run_id": "2026-04-01-opportunity-archive",
+    "depends_on": [],
+    "tables_needed": ["canonical_execution_traces", "canonical_execution_logs"],
+    "feasibility": "medium",
+    "expected_value": "high"
+  }
+]

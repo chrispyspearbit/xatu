@@ -53,7 +53,7 @@ Status key:
 
 ### Seeded Items
 
-7. [ ] Opportunity Archive
+7. [K] Opportunity Archive
    Goal: turn validated classifications into a historical opportunity library.
 
 8. [ ] Strategy Feasibility Layer

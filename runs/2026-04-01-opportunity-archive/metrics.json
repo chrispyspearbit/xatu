@@ -1,0 +1,45 @@
+{
+  "claim_count": 6,
+  "source_count": 6,
+  "row_count_total": 15862448,
+  "join_coverage": null,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "opportunity_classes_identified",
+      "description": "At least 4 distinct opportunity classes archived with structured metadata",
+      "status": "pass",
+      "value": 6
+    },
+    {
+      "name": "each_class_cites_prior_evidence",
+      "description": "Every archived class references specific prior run evidence",
+      "status": "pass",
+      "value": "all 6 classes cite specific runs and evidence sections"
+    },
+    {
+      "name": "observability_tagged",
+      "description": "Public observability and competitive intensity tagged per class",
+      "status": "pass",
+      "value": "all 6 classes have observability and competition attributes"
+    },
+    {
+      "name": "data_support_documented",
+      "description": "Data support level explicitly documented per class with Xatu table references",
+      "status": "pass",
+      "value": "completeness map covers all 6 classes with primary and missing data"
+    },
+    {
+      "name": "limitations_documented",
+      "description": "Gaps and limitations documented per class and cross-cutting",
+      "status": "pass",
+      "value": "6 caveats documented plus per-class limitation fields"
+    },
+    {
+      "name": "prior_runs_complete",
+      "description": "All referenced prior runs have validated status in results.tsv",
+      "status": "pass",
+      "value": "6/6 runs complete with KEEP decision"
+    }
+  ]
+}

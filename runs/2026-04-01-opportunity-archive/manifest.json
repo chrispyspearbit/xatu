@@ -1,0 +1,67 @@
+{
+  "run_id": "2026-04-01-opportunity-archive",
+  "phase": "Phase 3 — Opportunity and Portability",
+  "question": "What MEV opportunity classes can be distilled from the validated Phase 1-2 research into a structured historical library, and which classes have sufficient data support, public observability, and recurrence evidence to be meaningful for future work?",
+  "hypothesis": "The six completed research slices collectively identify a bounded set of MEV opportunity classes that differ meaningfully along dimensions of detectability, public observability, competitive intensity, and data support. A structured archive of these classes provides the input for strategy feasibility assessment.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The archive consolidates six prior validated runs into a structured library of six opportunity classes, each tagged with detection method, observability, competition intensity, data support, and limitations. The observability gradient and competition hierarchy are the most actionable structural findings. This is the necessary input for strategy feasibility (item #8) and cross-chain portability (item #9)."
+  },
+  "tables_used": [
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "Inherited from Runs 1, 5, 6; builder delivery and market structure"
+    },
+    {
+      "name": "mev_relay_validator_registration",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 5829223,
+      "notes": "Inherited from Runs 1, 6; validator registration and dependency"
+    },
+    {
+      "name": "mev_relay_bid_trace",
+      "date_start": "2024-09-13",
+      "date_end": "2024-09-13",
+      "row_count": 7819236,
+      "notes": "Inherited from Runs 2, 5; auction competition and bid intensity"
+    },
+    {
+      "name": "mempool_transaction",
+      "date_start": "2023-03-03",
+      "date_end": "2023-03-03",
+      "row_count": 1094776,
+      "notes": "Inherited from Run 3; public mempool visibility baseline"
+    },
+    {
+      "name": "canonical_execution_traces",
+      "date_start": "2023-07-01",
+      "date_end": "2023-07-01",
+      "row_count": 1029073,
+      "notes": "Inherited from Run 4; MEV taxonomy structural analysis"
+    },
+    {
+      "name": "canonical_execution_transaction",
+      "date_start": "2023-03-10",
+      "date_end": "2023-07-01",
+      "row_count": 46101,
+      "notes": "Inherited from Runs 3, 4; join tests and transaction-level context"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "107d710",
+    "created_at": "2026-04-01T08:00:00Z",
+    "data_source": "Synthesis of 6 prior validated runs from Xatu public parquet export",
+    "notes": "No new parquet queries executed. All evidence is consolidated from prior validated runs in runs/2026-04-01-*/"
+  }
+}

@@ -225,4 +225,36 @@ Sixth validated research slice. Agenda item #6: Validator / Proposer Dependency 
 3. Fee-Recipient-to-Builder Delivery Concentration — realized dependency via registration-delivery join
 
 ---
+## Entry #7 — Opportunity Archive — 2026-04-01
+
+### Context
+
+Seventh validated research slice. Agenda item #7: Opportunity Archive (Phase 3). This is the first Phase 3 item, synthesizing all Phase 1 and Phase 2 foundations into a structured opportunity library.
+
+### Key Findings
+
+- Six MEV opportunity classes archived from six prior validated runs: ETH-denominated arbitrage, sandwich attacks, liquidation MEV, backrunning, builder market position exploitation, and validator dependency risk.
+- A public observability gradient emerged: ~65% baseline visibility from mempool data creates a natural hierarchy where liquidation targets are most observable and sophisticated arbitrage/sandwich legs are least observable.
+- Competition intensity is extreme and tiered: ~1,181 bids per slot with 3-5 dominant builders capturing the majority of high-value MEV, leaving residual opportunities for the competitive fringe.
+- Data completeness varies significantly: structural classes (builder position, validator dependency) have the strongest Xatu data support; per-transaction MEV classes all share a token-denominated MEV gap requiring event log correlation.
+- Temporal stability is universally unknown — all estimates derive from single-day windows across 2023-2026.
+
+### Decision
+
+**KEEP** — establishes a structured, evidence-grounded library of opportunity classes with explicit attributes for detection, observability, competition, and data support. Required input for strategy feasibility assessment (item #8) and cross-chain portability (item #9).
+
+### Limitations
+
+- Synthesis only; no new parquet queries executed.
+- Temporal heterogeneity: underlying data spans 2023-2026 across different tables.
+- Structural frequency estimates only; ground-truth classification requires per-transaction query execution.
+- Token-denominated MEV (ERC-20 arb/sandwich) not observable from current data sources.
+
+### Follow-On Candidates (all held for curation)
+
+1. Per-Transaction MEV Classification Execution — ground-truth counts to replace structural estimates
+2. Temporal Stability of Opportunity Class Prevalence — multi-day sampling for regime analysis
+3. Trace-Log Correlation for Token MEV Archive Extension — extend archive to ERC-20 MEV classes
+
+---
 
