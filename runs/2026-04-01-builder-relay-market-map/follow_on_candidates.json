@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Builder Market Share Exact Breakdown",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "This slice produced bounded estimates of builder concentration. Exact per-builder block counts via GROUP BY on builder pubkey would yield precise HHI and top-N share, replacing the current ranges with ground truth.",
+    "parent_run_id": "2026-04-01-builder-relay-market-map",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_proposer_payload_delivered"],
+    "feasibility": "high",
+    "expected_value": "high",
+    "admission": "hold"
+  },
+  {
+    "title": "Builder Churn and Temporal Stability",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "Single-day snapshot cannot capture builder entry/exit or market share volatility. Extending to a multi-day or multi-week window would reveal whether concentration is stable or regime-dependent.",
+    "parent_run_id": "2026-04-01-builder-relay-market-map",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_proposer_payload_delivered"],
+    "feasibility": "high",
+    "expected_value": "medium",
+    "admission": "hold"
+  },
+  {
+    "title": "Builder Win Rate from Bid Traces",
+    "phase": "Phase 1 — Foundations",
+    "why_now": "This slice showed 109 bidding builders vs 47 delivering builders. Joining bid trace and delivery data for the same time window would reveal per-builder win rates and competitive dynamics.",
+    "parent_run_id": "2026-04-01-builder-relay-market-map",
+    "depends_on": [],
+    "tables_needed": ["mev_relay_bid_trace", "mev_relay_proposer_payload_delivered"],
+    "feasibility": "medium",
+    "expected_value": "high",
+    "admission": "hold"
+  }
+]

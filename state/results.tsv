@@ -1,2 +1,3 @@
 run_id	phase	agenda_item	status	decision	confidence	data_window	tables	row_count_total	join_coverage	report_path	notes
+2026-04-01-builder-relay-market-map	1	Builder / Relay Market Map	complete	KEEP	medium	2026-03-29	mev_relay_proposer_payload_delivered,mev_relay_validator_registration,mev_relay_bid_trace	13692498	0.9999	runs/2026-04-01-builder-relay-market-map/report.md	Single-day snapshot; bounded concentration estimates; exact per-builder breakdown deferred
 

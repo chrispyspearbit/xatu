@@ -11,7 +11,7 @@ Status key:
 
 ### Seeded Items
 
-1. [ ] Builder / Relay Market Map
+1. [K] Builder / Relay Market Map
    Goal: quantify builder share, relay share, overlap, concentration, and churn.
    Core tables: `mev_relay_proposer_payload_delivered`, `mev_relay_validator_registration`, `mev_relay_bid_trace`
    Acceptance: one validated run with explicit market-share metrics and concentration metrics.

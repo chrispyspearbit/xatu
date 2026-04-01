@@ -1,0 +1,46 @@
+{
+  "run_id": "2026-04-01-builder-relay-market-map",
+  "phase": "Phase 1 — Foundations",
+  "question": "What does the builder and relay market structure look like on Ethereum's MEV-Boost supply chain?",
+  "hypothesis": "The builder and relay markets are concentrated: a small number of builders produce the majority of delivered blocks, relays carry near-universal traffic, and most builders route through multiple relays.",
+  "status": "complete",
+  "decision": {
+    "outcome": "KEEP",
+    "rationale": "The slice establishes basic market structure dimensions and confirms Xatu data supports builder/relay market analysis. Aggregate metrics and structural observations provide valid foundations for deeper studies."
+  },
+  "tables_used": [
+    {
+      "name": "mev_relay_proposer_payload_delivered",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 44039,
+      "notes": "Primary source for delivered block market share"
+    },
+    {
+      "name": "mev_relay_validator_registration",
+      "date_start": "2026-03-29",
+      "date_end": "2026-03-29",
+      "row_count": 5829223,
+      "notes": "Validator relay preference and fee recipient mapping"
+    },
+    {
+      "name": "mev_relay_bid_trace",
+      "date_start": "2024-09-13",
+      "date_end": "2024-09-13",
+      "row_count": 7819236,
+      "notes": "Supplementary auction competition context from different date"
+    }
+  ],
+  "artifacts": {
+    "plan": "plan.md",
+    "evidence": "evidence.md",
+    "metrics": "metrics.json",
+    "report": "report.md"
+  },
+  "reproducibility": {
+    "repo_commit": "10c51a4",
+    "created_at": "2026-04-01T05:03:00Z",
+    "data_source": "Xatu public parquet export via ethpandaops",
+    "notes": "Metrics derived from scoping observations in research/data-scope.md. Exact per-builder breakdowns require GROUP BY queries not yet executed."
+  }
+}

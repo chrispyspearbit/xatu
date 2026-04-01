@@ -1,0 +1,45 @@
+{
+  "claim_count": 4,
+  "source_count": 3,
+  "row_count_total": 13692498,
+  "join_coverage": 0.9999,
+  "confidence": "medium",
+  "validation_checks": [
+    {
+      "name": "delivered_blocks_nonzero",
+      "description": "Unique delivered block count is positive",
+      "status": "pass",
+      "value": 6597
+    },
+    {
+      "name": "builder_count_nonzero",
+      "description": "Unique builder count is positive",
+      "status": "pass",
+      "value": 47
+    },
+    {
+      "name": "relay_count_nonzero",
+      "description": "Unique relay count is positive",
+      "status": "pass",
+      "value": 8
+    },
+    {
+      "name": "join_coverage_above_threshold",
+      "description": "Delivery-to-beacon join coverage exceeds 99%",
+      "status": "pass",
+      "value": 0.9999
+    },
+    {
+      "name": "relay_multiplicity_consistent",
+      "description": "Relay multiplicity (rows/unique blocks) is between 1 and relay count",
+      "status": "pass",
+      "value": 6.676
+    },
+    {
+      "name": "date_range_explicit",
+      "description": "All tables have explicit date ranges",
+      "status": "pass",
+      "value": "2026-03-29 (delivery, registration), 2024-09-13 (bid trace)"
+    }
+  ]
+}
