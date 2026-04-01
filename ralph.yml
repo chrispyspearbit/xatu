@@ -1,0 +1,201 @@
+event_loop:
+  prompt_file: "PROMPT.md"
+  completion_promise: "RESEARCH_SLICE_COMPLETE"
+  starting_event: "research_slice.start"
+  max_iterations: 600
+  max_runtime_seconds: 14400
+  checkpoint_interval: 1
+  idle_timeout_secs: 1800
+
+cli:
+  backend: "codex"
+  prompt_mode: "arg"
+
+core:
+  specs_dir: "./specs/"
+  guardrails:
+    - "One agenda item per loop. Do not combine unresolved questions."
+    - "Fresh context each iteration: save durable findings to repository state, not just transient memory."
+    - "Every important claim needs evidence tied to tables, dates, and row counts."
+    - "If validation fails, fix the run bundle or mark the slice BLOCKED. Do not hand-wave."
+    - "Do not skip feasibility limits discovered in research/data-scope.md."
+
+tasks:
+  enabled: true
+
+hats:
+  agenda_manager:
+    name: "Agenda Manager"
+    description: "Selects one agenda item, enforces phase order, and closes the loop after publication."
+    triggers: ["research_slice.start", "ranking.complete", "publish.complete"]
+    publishes: ["backlog.rank", "hypothesis.select"]
+    instructions: |
+      ## AGENDA MANAGER MODE
+
+      You're coordinating one validated research slice.
+
+      Process:
+      1. Read `state/agenda.md`, `state/CHANGELOG.md`, `state/results.tsv`, `research/program.md`, and `research/data-scope.md`.
+      2. Identify the earliest unfinished phase.
+      3. Publish `backlog.rank` with the unresolved agenda items from that phase.
+      4. When `ranking.complete` arrives, select exactly one item and publish `hypothesis.select`.
+      5. When `publish.complete` arrives, verify that the state files were updated and the push succeeded, then output `RESEARCH_SLICE_COMPLETE`.
+
+      Rules:
+      - One agenda item per loop.
+      - Never skip to a later phase while an earlier phase still has unresolved items unless the earlier items are explicitly marked `BLOCKED`.
+      - Stop after the selected item reaches a terminal state.
+
+  ranker:
+    name: "Ranker"
+    description: "Ranks candidate agenda items using evidence value, feasibility, and dependency order."
+    triggers: ["backlog.rank"]
+    publishes: ["ranking.complete"]
+    instructions: |
+      ## RANKER MODE
+
+      Rank the candidate agenda items before execution.
+
+      Use this rubric:
+      - Feasibility with available Xatu data
+      - Dependency value for later phases
+      - Expected information gain
+      - Cost and complexity
+
+      Prefer pairwise comparisons over vague scoring. Be explicit about why the top item should go next.
+      Publish `ranking.complete` with the selected item and a short rationale.
+
+  hypothesis_generator:
+    name: "Hypothesis Generator"
+    description: "Turns an agenda item into an executable run contract."
+    triggers: ["hypothesis.select", "experiment.revise"]
+    publishes: ["experiment.spec"]
+    instructions: |
+      ## HYPOTHESIS GENERATOR MODE
+
+      Convert the selected agenda item into a concrete, testable run bundle.
+
+      Required outputs inside `runs/<run_id>/`:
+      - `plan.md`
+      - `manifest.json`
+
+      Your contract must define:
+      - precise question and hypothesis
+      - exact Xatu tables to use
+      - date range or partition scope
+      - expected joins and minimum evidence required
+      - what counts as KEEP / DISCARD / PIVOT / BLOCKED
+
+      Keep scope tight enough for one loop.
+
+  critic:
+    name: "Critic"
+    description: "Adversarially reviews the run contract before execution."
+    triggers: ["experiment.spec"]
+    publishes: ["experiment.approved", "experiment.revise"]
+    instructions: |
+      ## CRITIC MODE
+
+      Review the proposed run contract like a skeptical reviewer.
+
+      Reject only for real problems:
+      - unsupported claims
+      - impossible joins
+      - vague success criteria
+      - scope too broad for one loop
+
+      After one revision, approve with caveats rather than creating an endless loop.
+      Publish either `experiment.approved` or `experiment.revise` with concrete feedback.
+
+  executor:
+    name: "Executor"
+    description: "Runs the analysis and produces the evidence bundle."
+    triggers: ["experiment.approved"]
+    publishes: ["experiment.executed"]
+    instructions: |
+      ## EXECUTOR MODE
+
+      Execute the approved run contract and create the required bundle inside `runs/<run_id>/`:
+      - `evidence.md`
+      - `metrics.json`
+      - `report.md`
+
+      Rules:
+      - Use exact tables and date ranges from the manifest.
+      - Record row counts, join coverage, and limitations.
+      - If evidence is weak or contradictory, say so in the report.
+      - Do not update shared ledgers yet.
+
+  validator:
+    name: "Validator"
+    description: "Applies hard validation to the run bundle."
+    triggers: ["experiment.executed"]
+    publishes: ["run.validated", "run.invalid"]
+    instructions: |
+      ## VALIDATOR MODE
+
+      Run `python3 scripts/validate_run.py runs/<run_id>`.
+
+      If validation passes, publish `run.validated`.
+      If validation fails, publish `run.invalid` with the exact failure output.
+
+      Do not soften failures. Hard gates are the point.
+
+  reflector:
+    name: "Reflector"
+    description: "Decides whether the run should be kept, discarded, pivoted, or marked blocked."
+    triggers: ["run.validated", "run.invalid"]
+    publishes: ["report.request", "experiment.revise"]
+    instructions: |
+      ## REFLECTOR MODE
+
+      If `run.invalid`:
+      - Decide whether the issue is fixable within this same slice.
+      - If yes, publish `experiment.revise`.
+      - If no, convert the run to a BLOCKED outcome and publish `report.request`.
+
+      If `run.validated`:
+      - Review the evidence and choose KEEP, DISCARD, or PIVOT.
+      - Ensure the decision is consistent with the manifest's success contract.
+      - Publish `report.request` with the final decision and the exact state updates required.
+
+  reporter:
+    name: "Reporter"
+    description: "Writes the decision to the append-only ledgers and hands off to publishing."
+    triggers: ["report.request"]
+    publishes: ["publish.request"]
+    instructions: |
+      ## REPORTER MODE
+
+      Update the persistent ledgers:
+      - append an entry to `state/CHANGELOG.md`
+      - append one row to `state/results.tsv`
+      - update the selected item in `state/agenda.md`
+
+      Rules:
+      - Never delete prior entries.
+      - Keep summaries concise but evidence-based.
+      - Include the run id and final decision everywhere.
+
+      Publish `publish.request` only after the three state files are updated and the run id, agenda item, and decision are available for the publisher.
+
+  publisher:
+    name: "Publisher"
+    description: "Commits the validated slice and pushes it to GitHub."
+    triggers: ["publish.request"]
+    publishes: ["publish.complete", "publish.failed"]
+    instructions: |
+      ## PUBLISHER MODE
+
+      Publish the completed slice to GitHub.
+
+      Process:
+      1. Confirm `origin` exists and the current branch is the intended publish branch.
+      2. Run `scripts/publish_slice.sh <run_id> "<agenda item>"`.
+      3. Verify the push succeeded.
+
+      Rules:
+      - Stage only the validated run bundle and the canonical state files.
+      - Do not silently publish unrelated workspace changes.
+      - If publish fails, publish `publish.failed` with the exact reason.
+      - Publish `publish.complete` only after the commit exists locally and the push to `origin` succeeds.
